@@ -92,6 +92,7 @@ GEM
     debug (1.11.0)
       irb (~> 1.10)
       reline (>= 0.3.8)
+    dicom (0.9.8)
     diff-lcs (1.6.2)
     dotenv (3.1.8)
     drb (2.2.3)
@@ -368,6 +369,7 @@ DEPENDENCIES
   bootsnap
   brakeman
   debug
+  dicom
   importmap-rails
   jbuilder
   kamal

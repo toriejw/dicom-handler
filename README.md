@@ -7,6 +7,7 @@
   - [POST /images](#post-images)
 - [Assumptions Made](#assumptions-made)
 - [Production-code Improvements](#production-code-improvements)
+- [Code Walkthrough](#code-walkthrough)
 
 ## Local Setup
 
@@ -85,3 +86,15 @@ For production code, here are some of the things I would do differently:
 2. Use S3 (or something similar) for file storage, and return a temporary, secure URL to the user to view the image.
 3. Learn more about DICOM! It seems like a file type with a lot of complexity, and before doing this "for real" I'd want to better understand how it works, especially any potential gotchas and best practices.
 4. Add unit tests for `DicomImage`. Currently the feature tests cover that class, but for a robust test suite, I'd also want unit tests.
+
+## Code Walkthrough
+
+Just in case you're not familiar with Rails, here's a quick rundown of what code files are important.
+
+This repo contains a single API, `POST /images`, with the route defined in [routes.rb](./config/routes.rb).
+
+The route definition points to the [ImagesController](./app/controllers/api/v1/images_controller.rb), where request processing is handled for the endpoint.
+
+The controller makes use of the [DicomImage](./app/models/dicom_image.rb) model to handle the bulk of the logic.
+
+Finally, the test file for the endpoint lives in [images_spec.rb](./spec/requests/api/v1/images_spec.rb).

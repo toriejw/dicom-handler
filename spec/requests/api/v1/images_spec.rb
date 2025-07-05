@@ -15,6 +15,23 @@ RSpec.describe 'Api::V1::Images', type: :request do
         expect(response).to have_http_status(:created)
         expect(JSON.parse(response.body)['message']).to eq('Success')
       end
+
+      context 'when query params are provided' do
+        let(:expected_attributes) {
+          {
+            '0002,0013' => 'IMS4-6-1-P95',
+            '0018,0050' => '3.0',
+            '0040,0244' => '20131217'
+          }
+        }
+
+        it 'returns the requested tag values' do
+          post '/api/v1/images?tags[]=0002,0013&tags[]=0018,0050&tags[]=0040,0244', params: { image: file }
+
+          expect(response).to have_http_status(:created)
+          expect(JSON.parse(response.body)['attributes']).to eq(expected_attributes)
+        end
+      end
     end
 
     context 'with no file' do

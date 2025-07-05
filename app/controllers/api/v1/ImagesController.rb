@@ -6,15 +6,27 @@ class Api::V1::ImagesController < ApplicationController
   def create
     begin
       validate_file()
-      DicomImage.upload(params[:image])
+      upload_image()
 
-      render json: { message: 'Success' }, status: :created
+      render json: {
+        message: 'Success',
+        attributes: @image.read_tags(image_params[:tags]),
+      }, status: :created
     rescue => e
       render json: { error: e.message }, status: :unprocessable_entity
     end
   end
 
   private
+
+  def image_params
+    params.permit(:image, tags: [])
+  end
+
+  def upload_image
+    @image = DicomImage.new
+    @image.upload(params[:image])
+  end
 
   def validate_file
     # Normally in Rails we'd use strong parameters, but strong params convert files to strings,

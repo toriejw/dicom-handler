@@ -8,12 +8,22 @@ RSpec.describe 'Api::V1::Images', type: :request do
       let(:file) { Rack::Test::UploadedFile.new(test_dicom_path, 'application/dicom') }
 
       it 'uploads the file successfully' do
-        expect {
-          post '/api/v1/images', params: { image: file }
-        }.to change { Dir.glob(Rails.root.join('public/uploads/*')).count }.by(1)
+        files_before = Dir.glob(Rails.root.join('public/uploads/*'))
+        dcm_files_before = files_before.select { |f| f.end_with?('.dcm') }
+        png_files_before = files_before.select { |f| f.end_with?('.png') }
+
+        post '/api/v1/images', params: { image: file }
 
         expect(response).to have_http_status(:created)
         expect(JSON.parse(response.body)['message']).to eq('Success')
+
+        files_after = Dir.glob(Rails.root.join('public/uploads/*'))
+        dcm_files_after = files_after.select { |f| f.end_with?('.dcm') }
+        png_files_after = files_after.select { |f| f.end_with?('.png') }
+
+        # Verify the API call created exactly 1 DCM and 1 PNG file
+        expect(dcm_files_after.count - dcm_files_before.count).to eq(1)
+        expect(png_files_after.count - png_files_before.count).to eq(1)
       end
 
       context 'when query params are provided' do

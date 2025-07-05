@@ -7,6 +7,7 @@ class Api::V1::ImagesController < ApplicationController
     begin
       validate_file()
       upload_image()
+      convert_to_png()
 
       render json: {
         message: 'Success',
@@ -18,6 +19,10 @@ class Api::V1::ImagesController < ApplicationController
   end
 
   private
+
+  def convert_to_png
+    @image.convert_to_png()
+  end
 
   def image_params
     params.permit(:image, tags: [])

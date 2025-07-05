@@ -35,3 +35,8 @@
 
 # Files uploaded by the user
 /public/uploads/*
+
+# Mac specific files
+.DS_Store
+public/.DS_Store
+spec/.DS_Store

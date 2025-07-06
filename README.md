@@ -17,7 +17,7 @@ You will need to have a ruby version manager installed locally. If you don't alr
 2. Clone repo: `git@github.com:toriejw/dicom-handler.git`
 3. Install imagemagick: `brew install imagemagick` 
 4. Install repo packages: `bundle install`
-5. Ensure install was successful by running `rails s`. You should see a server start. You can further confirm setup was successful by following instructions in the testing section below.
+5. Ensure install was successful by running `bundle exec rails s`. You should see a server start. You can further confirm setup was successful by following instructions in the testing section below.
 
 ## Testing
 

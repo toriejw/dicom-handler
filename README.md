@@ -15,8 +15,9 @@ You will need to have a ruby version manager installed locally. If you don't alr
 
 1. Install Ruby version 3.3.0. If using `rbenv`, you can do so using: `rbenv install 3.3.0`
 2. Clone repo: `git@github.com:toriejw/dicom-handler.git`
-3. Install repo packages: `bundle install`
-4. Ensure install was successful by running `rails s`. You should see a server start. You can further confirm setup was successful by following instructions in the testing section below.
+3. Install imagemagick: `brew install imagemagick` 
+4. Install repo packages: `bundle install`
+5. Ensure install was successful by running `rails s`. You should see a server start. You can further confirm setup was successful by following instructions in the testing section below.
 
 ## Testing
 

@@ -251,7 +251,7 @@ GEM
     regexp_parser (2.10.0)
     reline (0.6.1)
       io-console (~> 0.5)
-    rmagick (6.1.1)
+    rmagick (6.1.2)
       observer (~> 0.1)
       pkg-config (~> 1.4)
     rspec-core (3.13.5)
